@@ -27,4 +27,9 @@ public class TicketServiceImpl extends BaseServiceImpl<Ticket, Long, TicketRepos
     public List<Ticket> sortByAirLineName(String name) {
         return repository.sortByAirLineName(name);
     }
+
+    @Override
+    public List<Ticket> sortedByPrice(int choose) {
+        return repository.sortedByPrice(choose);
+    }
 }

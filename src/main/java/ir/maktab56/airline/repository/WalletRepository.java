@@ -6,5 +6,5 @@ import ir.maktab56.airline.domain.Wallet;
 public interface WalletRepository extends BaseRepository<Wallet, Long> {
 
 
-
+    Wallet findFirstByCustomerId(Long customerId);
 }

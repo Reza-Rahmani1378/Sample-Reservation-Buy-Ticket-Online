@@ -9,11 +9,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.ZonedDateTime;
-import java.util.List;
-
 @Entity
 @Table(name =User.TABLE_NAME )
-@Inheritance
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 @Getter
 @Setter
 @NoArgsConstructor
@@ -22,7 +20,7 @@ public class User extends BaseEntity<Long> {
     public static final String TABLE_NAME = "user_table";
 
     public static final String USER_TYPE = "user_type";
-    public static final String IS_BOSS = "is_boss";
+    private static final String AIR_LINE_OPERATOR = "air_line_operator";
 
     @Column
     private String first_name;
@@ -42,40 +40,15 @@ public class User extends BaseEntity<Long> {
     @Column
     private ZonedDateTime birth_day;
 
-    @Column(columnDefinition = "false")
-    private boolean isBoss;
+
+
 
     @Column(name = USER_TYPE)
     @Enumerated(EnumType.STRING)
     private UserType userType;
 
-    @OneToMany(mappedBy = "user" , cascade = CascadeType.ALL)
-    private List<Ticket> tickets;
+    @Column(name = AIR_LINE_OPERATOR , columnDefinition = "false")
+    private boolean airLineOperator;
 
-    @OneToOne(mappedBy = "user" , cascade = CascadeType.ALL)
-    private Wallet wallet;
-
-    @OneToOne
-    @JoinColumn(name = "air_line_id")
-    private AirLine air_line;
-
-    public User(
-            String first_name ,
-            String last_name ,
-            String username ,
-            String national_code ,
-            String password ,
-            ZonedDateTime birth_day ,
-            boolean isBoss,
-            UserType userType){
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.username = username;
-        this.national_code = national_code;
-        this.password = password;
-        this.birth_day = birth_day;
-        this.isBoss = isBoss;
-        this.userType = userType;
-    }
 
 }

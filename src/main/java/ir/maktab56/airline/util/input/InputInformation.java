@@ -8,6 +8,8 @@ public class InputInformation {
     public static final String FIRSTNAME_REGEX = "(?i)(^[a-z]+)[a-z .,-]((?! .,-)$){1,25}$";
     public static final String LASTNAME_REGEX = "(?i)(^[a-z]+)[a-z .,-]((?! .,-)$){1,25}$";
     public static final String BIRTH_DAY_REGEX = "^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$";
+    public static final String DEPARTURE_DAY_REGEX = "^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$";
+    public static final String RETURN_DAY_REGEX = "^\\d{4}\\-(0?[1-9]|1[012])\\-(0?[1-9]|[12][0-9]|3[01])$";
     public static final String NATIONAL_CODE_REGEX = "^\\d{10}$";
     public static final String PHONE_NUMBER_REGEX = "(0/91)?[7-9][0-9]{9}";
     public static final String CODE_BRANCH_REGEX = "[0-9]{4}";
@@ -16,6 +18,7 @@ public class InputInformation {
     public static final String CARD_NUMBER_REGEX = "[0-9]{16}";
     public static final String PASSWORD_CARD_REGEX = "[0-9]{4}";
     public static final String CVV2_CARD_REGEX = "[0-9]{4}";
+    public static final String TIME_LANDING_TAKEOFF_REGEX = "^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$";
 
 
     public static final String FIRSTNAME_WARNING =
@@ -29,6 +32,9 @@ public class InputInformation {
                     "After that the last name can contain a-z (ignore case) and [ '-,.].\n" +
                     "The last name can only end with an a-z (ignore case) character.";
     public static final String BIRTH_DAY_WARNING = "Your BirthDay is Wrong.";
+    public static final String DEPARTURE_DAY_WARNING = "Your Departure date is Wrong.";
+    public static final String RETURN_DAY_WARNING = "Your Departure date is Wrong.";
+    public static final String LANDING_TAKE_OFF_WARNING = "Your time is wrong.";
     public static final String NATIONAL_CODE_WARNING =
             "Your national code must be 10 digit, at least one letter and one number.";
     public static final String PHONE_NUMBER_WARNING =
@@ -49,6 +55,8 @@ public class InputInformation {
     public static final String FIRSTNAME_MESSAGE = "Enter your firstName :";
     public static final String LASTNAME_MESSAGE = "Enter your lastName :";
     public static final String BIRTH_DAY_MESSAGE = "Enter Your BirthDay in This format(2010-3-24) :";
+    public static final String DEPARTURE_DAY_MESSAGE = "Enter Your Departure date in This format(2010-3-24) :";
+    public static final String RETURN_DAY_MESSAGE = "Enter Your Return date in This format(2010-3-24) :";
     public static final String CODE_MESSAGE = "Enter your national code :";
     public static final String SALARY_MESSAGE = "Enter your salary :";
     public static final String PHONE_NUMBER_MESSAGE = "Enter your phone number :";
@@ -64,6 +72,7 @@ public class InputInformation {
     public static final String CARD_NUMBER_MESSAGE = "Enter card number :";
     public static final String PASS_WORD_CARD_MESSAGE = "Enter card password :";
     public static final String CVV2_MESSAGE = "Enter card CVV2 :";
+    public static final String LANDING_TAKE_OFF_MESSAGE = "Enter your time this format 14:12";
 
 
     public static String getFirstName() {
@@ -89,6 +98,26 @@ public class InputInformation {
                 BIRTH_DAY_REGEX,
                 null).getInputString();
         return ZonedDateTime.parse(birthday);
+    }
+
+    public static Date getDepartureDate() {
+        String departureDate = new Input(
+                DEPARTURE_DAY_MESSAGE,
+                DEPARTURE_DAY_WARNING,
+                DEPARTURE_DAY_REGEX,
+                null
+        ).getInputString();
+        return Date.valueOf(departureDate);
+    }
+
+    public static Date getReturnDate() {
+        String returnDate = new Input(
+                RETURN_DAY_MESSAGE,
+                RETURN_DAY_WARNING,
+                RETURN_DAY_REGEX,
+                null
+        ).getInputString();
+        return Date.valueOf(returnDate);
     }
 
     public static Double getSalary() {
@@ -204,5 +233,14 @@ public class InputInformation {
                 CVV2_WARNING,
                 CVV2_CARD_REGEX,
                 null).getInputString();
+    }
+
+    public static String getTime() {
+        return new Input(
+                LANDING_TAKE_OFF_MESSAGE,
+                LANDING_TAKE_OFF_WARNING,
+                LASTNAME_REGEX,
+                null
+        ).getInputString();
     }
 }

@@ -12,4 +12,6 @@ public interface TicketService extends BaseService<Ticket, Long> {
 
     List<Ticket> sortByAirLineName(String name);
 
+    List<Ticket> sortedByPrice(int choose);
+
 }

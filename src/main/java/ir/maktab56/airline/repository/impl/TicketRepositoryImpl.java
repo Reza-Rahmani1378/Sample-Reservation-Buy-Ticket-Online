@@ -36,7 +36,10 @@ public class TicketRepositoryImpl extends BaseRepositoryImpl<Ticket, Long> imple
         Predicate to = criteriaBuilder.like(root.get("to"),
                 "%" + ticketDto.getTo() + "%");
 
-        query.where(criteriaBuilder.and(from , to));
+        Predicate date = criteriaBuilder.like(root.get("depart_time"),
+                "%" + ticketDto.getDate() + "%");
+
+        query.where(criteriaBuilder.and(from , to,date));
 
         try {
             return entityManager.createQuery(query).getResultList();
@@ -58,5 +61,30 @@ public class TicketRepositoryImpl extends BaseRepositoryImpl<Ticket, Long> imple
         }
 //        select t.air_line
 
+    }
+
+    @Override
+    public List<Ticket> sortedByPrice(int choose) {
+        switch (choose) {
+            case 1:
+                TypedQuery<Ticket> query = entityManager.createQuery("select t from Ticket t order by t.price_ticket", getEntityClass());
+                try {
+                    return query.getResultList();
+                } catch (NoResultException e) {
+                    return null;
+                }
+
+            case 2:
+                TypedQuery<Ticket> ticketTypedQuery = entityManager.createQuery("select t from Ticket t order by t.price_ticket desc ", getEntityClass());
+                try {
+                    return ticketTypedQuery.getResultList();
+                } catch (NoResultException e){
+                    return null;
+                }
+
+            default:
+                return null;
+
+        }
     }
 }

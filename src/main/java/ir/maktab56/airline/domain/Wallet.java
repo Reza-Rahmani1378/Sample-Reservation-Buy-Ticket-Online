@@ -6,10 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.JoinTable;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = Wallet.TABLE_NAME)
@@ -20,13 +17,16 @@ import javax.persistence.Table;
 public class Wallet extends BaseEntity<Long> {
     public static final String TABLE_NAME = "wallet_table";
     @OneToOne
-    @JoinTable(name = "user_id")
-    private User user;
+    @JoinTable(name = "customer_id")
+    private Customer customer;
 
+    @Column
     private Long totalAmount = 0L;
 
+    @Column
     private Long creditAmount = 0L;
 
+    @Column
     private Long cashAmount = 0L;
 
 }

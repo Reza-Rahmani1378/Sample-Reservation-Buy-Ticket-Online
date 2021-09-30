@@ -24,17 +24,17 @@ public class AirLine extends BaseEntity<Long> {
     @Column
     private String concat_us;
 
-    public AirLine(String name , String concat_us , User user) {
+    public AirLine(String name , String concat_us , Customer customer) {
         this.name = name;
         this.concat_us = concat_us;
-        this.user = user;
+        this.customer = customer;
     }
 
     @OneToMany(mappedBy = "air_line", cascade = CascadeType.ALL)
     private List<Ticket> tickets;
 
     @OneToOne(mappedBy = "air_line" , cascade = CascadeType.PERSIST)
-    private User user;
+    private Customer customer;
 
 
 }

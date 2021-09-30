@@ -12,4 +12,6 @@ public interface TicketRepository extends BaseRepository<Ticket, Long> {
     List<Ticket> searchByFromAndTo(TicketDto ticketDto);
 
     List<Ticket> sortByAirLineName(String name);
+
+    List<Ticket> sortedByPrice(int choose);
 }

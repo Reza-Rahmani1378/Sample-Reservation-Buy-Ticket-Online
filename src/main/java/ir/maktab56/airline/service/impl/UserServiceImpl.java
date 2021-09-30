@@ -46,7 +46,7 @@ public class UserServiceImpl extends BaseServiceImpl<User, Long, UserRepository>
         user.setNational_code(InputInformation.getNationalCode());
         user.setUsername(username);
         user.setPassword(InputInformation.getPassword());
-        user.setUserType(UserType.USER);
+        user.setUserType(UserType.CUSTOMER);
         user.setBirth_day(InputInformation.getBirthDay());
 
         repository.getEntityManager().getTransaction().begin();
