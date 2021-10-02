@@ -22,7 +22,7 @@ public class UserRepositoryImpl extends BaseRepositoryImpl<User, Long> implement
     @Override
     public User existByUsername(String username) {
         TypedQuery<User> user_name = entityManager.createQuery(
-                "select u.username from User u where u.username =: username",
+                "select u from User u where u.username = :username",
                 User.class
         ).setParameter("username", username);
         try {

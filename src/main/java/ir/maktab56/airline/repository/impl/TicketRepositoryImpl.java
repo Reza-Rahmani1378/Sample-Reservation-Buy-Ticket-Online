@@ -12,6 +12,8 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
+import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 
 public class TicketRepositoryImpl extends BaseRepositoryImpl<Ticket, Long> implements TicketRepository {
@@ -30,22 +32,24 @@ public class TicketRepositoryImpl extends BaseRepositoryImpl<Ticket, Long> imple
         CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Ticket> query = criteriaBuilder.createQuery(getEntityClass());
         Root<Ticket> root = query.from(getEntityClass());
-        Predicate from = criteriaBuilder.like(root.get("from"),
+        Predicate from = criteriaBuilder.like(root.get("start_point"),
                 "%" + ticketDto.getFrom() + "%");
 
-        Predicate to = criteriaBuilder.like(root.get("to"),
+        Predicate to = criteriaBuilder.like(root.get("end_point"),
                 "%" + ticketDto.getTo() + "%");
 
         Predicate date = criteriaBuilder.like(root.get("depart_time"),
                 "%" + ticketDto.getDate() + "%");
 
-        query.where(criteriaBuilder.and(from , to,date));
+        query.where(criteriaBuilder.and(from, to, date));
 
-        try {
-            return entityManager.createQuery(query).getResultList();
-        } catch (Exception e) {
+        return entityManager.createQuery(query).getResultList();
+
+
+      /*  try {
+        } *//*catch (Exception e) {
             return null;
-        }
+        }*/
     }
 
     @Override
@@ -78,7 +82,7 @@ public class TicketRepositoryImpl extends BaseRepositoryImpl<Ticket, Long> imple
                 TypedQuery<Ticket> ticketTypedQuery = entityManager.createQuery("select t from Ticket t order by t.price_ticket desc ", getEntityClass());
                 try {
                     return ticketTypedQuery.getResultList();
-                } catch (NoResultException e){
+                } catch (NoResultException e) {
                     return null;
                 }
 

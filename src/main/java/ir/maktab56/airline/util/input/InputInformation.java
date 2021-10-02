@@ -91,23 +91,22 @@ public class InputInformation {
                 null).getInputString();
     }
 
-    public static ZonedDateTime getBirthDay() {
+    public static Date getBirthDay() {
         String birthday = new Input(
                 BIRTH_DAY_MESSAGE,
                 BIRTH_DAY_WARNING,
                 BIRTH_DAY_REGEX,
                 null).getInputString();
-        return ZonedDateTime.parse(birthday);
+        return Date.valueOf(birthday);
     }
 
-    public static Date getDepartureDate() {
-        String departureDate = new Input(
+    public static String getDepartureDate() {
+        return new Input(
                 DEPARTURE_DAY_MESSAGE,
                 DEPARTURE_DAY_WARNING,
                 DEPARTURE_DAY_REGEX,
                 null
         ).getInputString();
-        return Date.valueOf(departureDate);
     }
 
     public static Date getReturnDate() {

@@ -9,14 +9,14 @@ public class TicketDto {
 
     private String to;
 
-    private Date date;
+    private String date;
 
     public TicketDto(String from, String to) {
         this.from = from;
         this.to = to;
     }
 
-    public TicketDto(String from , String to , Date date) {
+    public TicketDto(String from , String to , String date) {
         this.from = from;
         this.to = to;
         this.date = date;
@@ -42,11 +42,11 @@ public class TicketDto {
         this.to = to;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 }

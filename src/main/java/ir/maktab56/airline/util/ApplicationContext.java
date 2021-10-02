@@ -16,12 +16,14 @@ public class ApplicationContext {
     private static final WalletRepository walletRepository;
     private static final WalletLogRepository walletLogRepository;
     private static final TicketRepository ticketRepository;
+    private static final AirLineOperatorRepository airLineoperatorRepository;
     private static final UserService userService;
     private static final CustomerService customerService;
     private static final AirLineService airLineService;
     private static final TicketService ticketService;
     private static final WalletService walletService;
     private static final WalletLogService walletLogService;
+    private static final AirLineOperatorService airLineoperatorService;
 
 
     static {
@@ -44,6 +46,11 @@ public class ApplicationContext {
 
         ticketRepository = new TicketRepositoryImpl(entityManager);
         ticketService = new TicketServiceImpl(ticketRepository);
+
+        airLineoperatorRepository = new AirLineOperatorRepositoryImpl(entityManager);
+        airLineoperatorService = new AirLineOperatorServiceImpl(airLineoperatorRepository);
+
+
     }
 
     public static UserService getUserService() {
@@ -66,4 +73,7 @@ public class ApplicationContext {
         return airLineService;
     }
 
+    public static AirLineOperatorService getAirLineoperatorService() {
+        return airLineoperatorService;
+    }
 }

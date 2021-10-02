@@ -17,7 +17,6 @@ import javax.persistence.*;
 public class Wallet extends BaseEntity<Long> {
     public static final String TABLE_NAME = "wallet_table";
     @OneToOne
-    @JoinTable(name = "customer_id")
     private Customer customer;
 
     @Column
